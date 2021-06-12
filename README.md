@@ -1,5 +1,11 @@
 # CSV to YAML Converter 
 
+### Requirements
+```
+Python3
+termcolor
+```
+
 ### Instructions
 
 ```
