@@ -1,13 +1,9 @@
-## Custom CSV to YML Converter
+# CSV to YAML Converter 
 
-### Prerequisites
-
-- Python 3
-
-### How to run
+### Instructions
 
 ```
-$ python main.py <csv file path> <output yml file path>
+$ python3 main.py <csv file path> <output yml file path>
 ```
 
 Example
