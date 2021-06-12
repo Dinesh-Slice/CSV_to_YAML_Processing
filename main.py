@@ -28,9 +28,19 @@ def get_description_points(question):
     question = question[1::]
     for i in range(0, len(question)):
         temp = " ".join(question[i].split())
-        desc = {i: {"label": str.format(temp)}}
+        desc = {i: {"label": '"' + str.format(temp) + '"'}}
         description_dict.update(desc)
     return description_dict
+
+
+def get_grouping(grouping):
+    if grouping == "ClassRelated":
+        group = "classSpecific"
+    elif grouping == "General":
+        group = "generic"
+    elif grouping == "ClaimHistory":
+        group = "priorClaims"
+    return group
 
 
 # ----------------------------------------------------------------------------------------------------
@@ -58,20 +68,26 @@ if __name__ == "__main__":
         record = df.iloc[i]
         item = {
             record["Question code / Key"]: {
-                "title": get_title(record["Question"]),
-                "type": "radio",
-                "grouping": "classSpecific",
+                "title": '"' + get_title(record["Question"]).strip() + '"',
+                "type": '"' + "radio" + '"',
+                "grouping": '"' + get_grouping(record["group"]) + '"',
                 "order": int(record["Order"]),
                 "options": {
                     0: {
                         "value": True,
-                        "label": "Yes",
-                        "id": generate_id(record["Question code / Key"]) + "-true",
+                        "label": '"' + "Yes" + '"',
+                        "id": '"'
+                        + generate_id(record["Question code / Key"])
+                        + "-true"
+                        + '"',
                     },
                     1: {
                         "value": False,
-                        "label": "No",
-                        "id": generate_id(record["Question code / Key"]) + "-false",
+                        "label": '"' + "No" + '"',
+                        "id": '"'
+                        + generate_id(record["Question code / Key"])
+                        + "-false"
+                        + '"',
                     },
                 },
                 "descriptionPoints": get_description_points(record["Question"]),
@@ -82,7 +98,7 @@ if __name__ == "__main__":
     data_dict = {"content": data_content}
 
     try:
-        yml.dump(data_dict, write_file, sort_keys=False, allow_unicode=False)
+        yml.dump(data_dict, write_file, sort_keys=False, allow_unicode=True, width=1000)
         write_file.close()
         print("Csv to Yaml Successful !!")
     except Exception as error:
