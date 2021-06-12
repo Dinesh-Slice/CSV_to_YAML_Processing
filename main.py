@@ -5,7 +5,9 @@ import sys
 import pandas as pd
 import yaml as yml
 import numpy as np
+from termcolor import colored
 import re
+import os
 
 # ----------------------------------------------------------------------------------------------------
 # Regex Magic
@@ -15,6 +17,10 @@ def generate_id(question_code):
     temp = re.sub(r"([A-Z])", r" \1", question_code).split()
     _id = "-".join([str(item).lower() for item in temp])
     return _id
+
+
+# ----------------------------------------------------------------------------------------------------
+# Functions to return desired columns / cells
 
 
 def get_title(question):
@@ -55,6 +61,7 @@ if __name__ == "__main__":
 
     to_be_dropped = ["Wave", "Notes / Questions / Decision", "Card", "Screen"]
 
+    # Clean the df
     df.drop(to_be_dropped, inplace=True, axis=1)
     df.replace(" ", np.nan, inplace=True)
     df.dropna(axis=0, how="any", inplace=True)
@@ -97,9 +104,12 @@ if __name__ == "__main__":
 
     data_dict = {"content": data_content}
 
+    # ----------------------------------------------------------------------------------------------------
+    # Dump the YAML File
+
     try:
         yml.dump(data_dict, write_file, sort_keys=False, allow_unicode=True, width=1000)
         write_file.close()
-        print("Csv to Yaml Successful !!")
+        print("YAML File Generated in: " + colored(os.path.abspath(yml_file), "red"))
     except Exception as error:
         print("Error occurred: " + repr(error))
