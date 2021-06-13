@@ -1,2 +1,2 @@
 #!/bin/bash
-sed "s/'//g" sample.yml | tee final_file.yml > /dev/null 2>&1
+sed "s/'//g" out.yml | tee final_file.yml > /dev/null 2>&1
