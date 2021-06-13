@@ -56,7 +56,7 @@ def get_grouping(grouping):
 
 if __name__ == "__main__":
     csv_file = sys.argv[1]
-    yml_file = sys.argv[2]
+    yml_file = "out.yml"
 
     df = pd.read_csv(csv_file)
     write_file = open(yml_file, "w")
@@ -128,7 +128,6 @@ for char in words:
 # Opens the file with default application
 if sys.platform == "darwin":
     subprocess.call(["sh", "./regex.sh"])
-    os.system("open " + (os.path.abspath("final_file.yml")))
+    os.system("open " + (os.path.abspath("final_file.yml")))  # Mac OS
 elif sys.platform == "win32":
-    os.system("start " + (os.path.abspath("final_file.yml")))
-# Windows
+    os.system("start " + (os.path.abspath("final_file.yml")))  # Windows

@@ -10,12 +10,12 @@
 ### Instructions
 
 ```
-$ python3 main.py <csv file path> out.yml
+$ python3 main.py <csv file path> 
 ```
 
 Example
 ```
-$ python main.py sample.csv out.yml
+$ python main.py sample.csv 
 ```
 
 ### Issues (Windows machines only)
