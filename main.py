@@ -6,6 +6,8 @@ import pandas as pd
 import yaml as yml
 import numpy as np
 from termcolor import colored
+from time import sleep
+import subprocess
 import re
 import os
 
@@ -24,7 +26,7 @@ def generate_id(question_code):
 
 
 def get_title(question):
-    question = question.split("*")
+    question = str(question).split("*")
     return question[0]
 
 
@@ -64,7 +66,7 @@ if __name__ == "__main__":
     # Clean the df
     df.drop(to_be_dropped, inplace=True, axis=1)
     df.replace(" ", np.nan, inplace=True)
-    df.dropna(axis=0, how="any", inplace=True)
+    # df.dropna(axis=0, how="any", inplace=True)
     df = df.replace("\n", "", regex=True)
     df.columns = df.columns.str.replace("\n", "")
     df = df.reset_index(drop=True)
@@ -113,3 +115,20 @@ if __name__ == "__main__":
         print("YAML File Generated in: " + colored(os.path.abspath(yml_file), "red"))
     except Exception as error:
         print("Error occurred: " + repr(error))
+
+# ----------------------------------------------------------------------------------------------------
+# Formating File into desired form
+
+words = "NOTE : If on Windows, Remove single quotes by using find and replace \n "
+for char in words:
+    sleep(0.04)
+    sys.stdout.write(char)
+    sys.stdout.flush()
+
+# Opens the file with default application
+if sys.platform == "darwin":
+    subprocess.call(["sh", "./regex.sh"])
+    os.system("open " + (os.path.abspath("final_file.yml")))
+elif sys.platform == "win32":
+    os.system("start " + (os.path.abspath("final_file.yml")))
+# Windows
