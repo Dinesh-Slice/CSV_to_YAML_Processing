@@ -41,13 +41,17 @@ def get_description_points(question):
     return description_dict
 
 
+grouping_enum = {
+    "ClassRelated": "classSpecific",
+    "General": "generic",
+    "ClaimHistory": "priorClaims",
+}
+
+
 def get_grouping(grouping):
-    if grouping == "ClassRelated":
-        group = "classSpecific"
-    elif grouping == "General":
-        group = "generic"
-    elif grouping == "ClaimHistory":
-        group = "priorClaims"
+    for item in grouping_enum:
+        if grouping == item:
+            group = grouping_enum[item]
     return group
 
 
