@@ -7,6 +7,11 @@
 - Pandas 
 - Numpy
 
+**To install all requirements, run:**
+```
+pip3 install -r requirements.txt
+```
+
 ### Instructions
 
 ```
