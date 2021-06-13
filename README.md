@@ -23,7 +23,7 @@ $ python main.py sample.csv out.yml
 Strings are surrounded by both double quotes and single quotes. i.e 
 
 ```
-'"string'"
+'"string"'
 ```
 
 - Fix: 
