@@ -83,7 +83,7 @@ if __name__ == "__main__":
             record["Question code / Key"]: {
                 "title": '"' + get_title(record["Question"]).strip() + '"',
                 "type": '"' + "radio" + '"',
-                "grouping": '"' + get_grouping(record["group"]) + '"',
+                "grouping": '"' + get_grouping(record["Disp. Group"]) + '"',
                 "order": int(record["Order"]),
                 "options": {
                     0: {
@@ -125,7 +125,7 @@ if __name__ == "__main__":
 
 words = "NOTE : If on Windows, Remove single quotes by using find and replace \n "
 for char in words:
-    sleep(0.04)
+    sleep(0.03)
     sys.stdout.write(char)
     sys.stdout.flush()
 
