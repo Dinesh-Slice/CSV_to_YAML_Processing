@@ -125,5 +125,6 @@ for char in words:
 if sys.platform == "darwin":
     subprocess.call(["sh", "./regex.sh"])
     os.system("open " + (os.path.abspath("final_file.yml")))  # Mac OS
+    subprocess.call(["rm", "-r", "out.yml"])
 elif sys.platform == "win32":
     os.system("start " + (os.path.abspath("out.yml")))  # Windows
