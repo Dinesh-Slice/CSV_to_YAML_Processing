@@ -10,7 +10,6 @@ from time import sleep
 import subprocess
 import re
 import os
-import ruamel.yaml
 from Headers import *
 
 # ----------------------------------------------------------------------------------------------------
