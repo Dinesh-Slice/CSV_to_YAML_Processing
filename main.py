@@ -10,6 +10,8 @@ from time import sleep
 import subprocess
 import re
 import os
+import ruamel.yaml
+from Headers import *
 
 # ----------------------------------------------------------------------------------------------------
 # Regex Magic
@@ -41,13 +43,6 @@ def get_description_points(question):
     return description_dict
 
 
-grouping_enum = {
-    "ClassRelated": "classSpecific",
-    "General": "generic",
-    "ClaimHistory": "priorClaims",
-}
-
-
 def get_grouping(grouping):
     for item in grouping_enum:
         if grouping == item:
@@ -65,8 +60,6 @@ if __name__ == "__main__":
     df = pd.read_csv(csv_file)
     write_file = open(yml_file, "w")
 
-    to_be_dropped = ["Wave", "Notes / Questions / Decision", "Card", "Screen"]
-
     # Clean the df
     df.drop(to_be_dropped, inplace=True, axis=1)
     df.replace(" ", np.nan, inplace=True)
@@ -80,33 +73,32 @@ if __name__ == "__main__":
     for i in range(0, len(df)):
         record = df.iloc[i]
         item = {
-            record["Question code / Key"]: {
-                "title": '"' + get_title(record["Question"]).strip() + '"',
+            record[classCode]: {
+                "title": '"' + get_title(record[question]).strip() + '"',
                 "type": '"' + "radio" + '"',
-                "grouping": '"' + get_grouping(record["Disp. Group"]) + '"',
-                "order": int(record["Order"]),
+                "grouping": '"' + get_grouping(record[group]) + '"',
+                order: int(record[order]),
                 "options": {
                     0: {
                         "value": True,
                         "label": '"' + "Yes" + '"',
-                        "id": '"'
-                        + generate_id(record["Question code / Key"])
-                        + "-true"
-                        + '"',
+                        "id": '"' + generate_id(record[classCode]) + "-true" + '"',
                     },
                     1: {
                         "value": False,
                         "label": '"' + "No" + '"',
-                        "id": '"'
-                        + generate_id(record["Question code / Key"])
-                        + "-false"
-                        + '"',
+                        "id": '"' + generate_id(record[classCode]) + "-false" + '"',
                     },
                 },
-                "descriptionPoints": get_description_points(record["Question"]),
+                "descriptionPoints": get_description_points(record[question]),
             }
         }
         data_content.update(item)
+
+    # Removing empty description Points
+    for item in data_content:
+        if data_content[item]["descriptionPoints"] == {}:
+            data_content[item].popitem()
 
     data_dict = {"content": data_content}
 
@@ -134,4 +126,4 @@ if sys.platform == "darwin":
     subprocess.call(["sh", "./regex.sh"])
     os.system("open " + (os.path.abspath("final_file.yml")))  # Mac OS
 elif sys.platform == "win32":
-    os.system("start " + (os.path.abspath("final_file.yml")))  # Windows
+    os.system("start " + (os.path.abspath("out.yml")))  # Windows
