@@ -127,5 +127,3 @@ if sys.platform == "darwin":
     subprocess.call(["rm", "-r", "out.yml"])
 elif sys.platform == "win32":
     os.system("start " + (os.path.abspath("out.yml")))  # Windows
-
-print("hello")
