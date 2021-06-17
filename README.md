@@ -17,6 +17,7 @@ pip3 install -r requirements.txt
 ```
 $ python3 main.py <csv file path> 
 ```
+Edit *Headers.py* file with necessary information regarding the csv headers. 
 
 Example
 ```
