@@ -107,14 +107,14 @@ if __name__ == "__main__":
     try:
         yml.dump(data_dict, write_file, sort_keys=False, allow_unicode=True, width=1000)
         write_file.close()
-        print("YAML File Generated in: " + colored(os.path.abspath(yml_file), "red"))
+        print(colored("Yaml file generated successfully!", "red"))
     except Exception as error:
         print("Error occurred: " + repr(error))
 
 # ----------------------------------------------------------------------------------------------------
 # Formating File into desired form
 
-words = "NOTE : If on Windows, Remove single quotes by using find and replace \n "
+words = "NOTE : If on Windows, Remove single quotes by using find and replace\n"
 for char in words:
     sleep(0.03)
     sys.stdout.write(char)
